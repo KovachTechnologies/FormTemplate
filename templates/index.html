@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ config.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .form-title {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: 20px;
+            height: calc(100vh - 100px);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .quadrant {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .quadrant h2 {
+            margin: 0 0 10px;
+            font-size: 1.2em;
+            color: #555;
+        }
+        .grid-form {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 5px;
+            flex-grow: 1;
+        }
+        .grid-form div {
+            display: contents;
+        }
+        .grid-form label {
+            padding: 5px;
+            font-weight: bold;
+            color: #666;
+        }
+        .grid-form input[type="text"] {
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .text-form {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .text-form textarea {
+            flex-grow: 1;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            min-height: 50px;
+        }
+        /* Specific quadrant styling to match diagram */
+        .quadrant1, .quadrant2 {
+            border: 1px solid #999;
+            background-color: #e0e0e0;
+        }
+        .quadrant3, .quadrant4 {
+            border: 1px solid #999;
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-title">{{ config.title }}</div>
+    <div class="container">
+        <!-- Quadrant 1 -->
+        <div class="quadrant quadrant1">
+            {% if config.quadrant1.fields %}
+                <div class="grid-form">
+                    {% for field in config.quadrant1.fields %}
+                        <div>
+                            <label>{{ field }}</label>
+                            <input type="text" name="{{ field | replace(' ', '_') }}">
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Quadrant 2 -->
+        <div class="quadrant quadrant2">
+            {% if config.quadrant2.fields %}
+                <div class="grid-form">
+                    {% for field in config.quadrant2.fields %}
+                        <div>
+                            <label>{{ field }}</label>
+                            <input type="text" name="{{ field | replace(' ', '_') }}">
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Quadrant 3 -->
+        <div class="quadrant quadrant3">
+            <h2>{{ config.quadrant3.title }}</h2>
+            <div class="text-form">
+                <textarea name="{{ config.quadrant3.title | replace(' ', '_') }}"></textarea>
+            </div>
+        </div>
+
+        <!-- Quadrant 4 -->
+        <div class="quadrant quadrant4">
+            <h2>{{ config.quadrant4.title }}</h2>
+            <div class="text-form">
+                <textarea name="{{ config.quadrant4.title | replace(' ', '_') }}"></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
